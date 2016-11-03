@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en" class="no-js">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+
+  <link rel="stylesheet" href="http://fonts.googleapis.com/css?family=Open+Sans:400,300,700" rel='stylesheet' type='text/css'>
+
+  <link rel="stylesheet" href="css/reset.css">
+  <link rel="stylesheet" href="css/style.css">
+  <script src="js/modernizr.js"></script>
+
+  <title>appLift SVG Animation</title>
+</head>
+
+<body>
+
+  <header>
+    <a href="#">
+      <svg viewBox="0 0 160 160" class="svg-icon">
+        <use xlink:href="./img/sprite.svg#icon-list"></use>
+      </svg>
+    </a>
+
+    <div class="brand-logo">
+      <a href="#"><h1>appLift</h1></a>
+    </div>
+
+    <a href="#">
+      <svg viewBox="0 0 160 160" class="svg-icon">
+        <use xlink:href="./img/sprite.svg#icon-settings"></use>
+      </svg>
+    </a>
+
+  </header>
+
+  <div class="main-contents">
+    <div class="svg-container">
+
+      <svg id="animated-svg" version="1.1" x="0px" y="0px" width="250px" height="250px" viewBox="0 0 200 200" style="enable-background:new 0 0 200 200;" xml:space="preserve">
+
+            <title>appLift SVG Animation</title>
+            <desc>appLift status according to binboyusuri level</desc>
+
+            <g id="applift">
+              <g id="cylinder">
+                <rect id="cylinder-bottom" class="stroke stroke-color-1" x="81" y="98" width="34" height="0" transform="rotate(180 98 141)" data-height="6"/>
+                <rect id="cylinder-base" class="stroke stroke-color-1" x="92" y="74" width="12" height="0" transform="rotate(180 98 126)" data-height="24"/>
+              </g>
+              <g id="back">
+                <rect id="back-bar" class="stroke stroke-color-1" x="92" y="34" width="12" height="0" transform="rotate(180 98 80)" data-height="8"/>
+                <rect id="back-base" class="stroke stroke-color-1" x="61" y="-38" width="76" height="0" transform="rotate(180 99 40)" data-height="76"/>
+              </g>
+              <g id="face">
+                <rect id="mouse" class="stroke stroke-color-1 fill-color-1" x="89" y="92" width="18" height="2" transform="translate(98 93) scale(0)"/>
+                <circle id="left-eye" class="stroke stroke-color-1 fill-color-1" cx="80" cy="67" r="4" transform="translate(80 67) scale(0)"/>
+                <circle id="right-eye" class="stroke stroke-color-1 fill-color-1" cx="116" cy="67" r="4" transform="translate(116 67) scale(0)"/>
+              </g>
+              <g id="seat">
+                <rect id="seat-base" class="stroke stroke-color-1" x="51" y="126" width="0" height="29" data-width="94"/>
+                <line id="seat-bottom" class="stroke stroke-color-1" x1="51" y1="148" x2="51" y2="148" data-x="145"/>
+              </g>
+              <line id="floor" class="stroke stroke-color-1" y1="185" x2="0" y2="185" data-x="200"/>
+            </g>
+
+            </svg>
+    </div>
+
+    <div class="status-test">
+      <a id="start" href="#">start</a>
+      <a id="face1" href="#">lv1</a>
+      <a id="face2" href="#">lv2</a>
+      <a id="uplift" href="#">lv3</a>
+      <a id="downshift" href="#">restart</a>
+    </div>
+
+  </div>
+
+  <script src="https://code.jquery.com/jquery-3.1.1.min.js" integrity="sha256-hVVnYaiADRTO2PzUGmuLJr8BLUSjGIZsDYGmIJLv2b8=" crossorigin="anonymous"></script>
+  <script src="js/snap.svg-min.js"></script>
+  <script src="js/main.js"></script>
+  <script>
+  $.ajax({
+    type: 'get',
+    url: './img/sprite.svg'
+  }).done(function(data) {
+    var svg = $(data).find('svg');
+    $('body').prepend(svg);
+  });
+</script>
+</body>
+
+</html>

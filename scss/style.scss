@@ -1,0 +1,176 @@
+@import 'bourbon/bourbon';
+@import '../partials/variables';
+@import '../partials/layout';
+/* -----------------------------
+
+Primary Styles
+
+----------------------------- */
+*,
+*::after,
+*::before {
+  @include box-sizing(border-box);
+}
+
+body {
+  background-color: #fff;
+  font-family: $primary-font;
+}
+
+header {
+  position: fixed;
+  top: 0;
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  padding: 2em;
+  background: $color-4;
+  -webkit-box-shadow: 0 0 1px 0 rgba(0,0,0,.3);
+  -moz-box-shadow: 0 0 1px 0 rgba(0,0,0,.3);
+  box-shadow: 0 0 1px 0 rgba(0,0,0,.3);
+
+  h1 {
+    font-size: 20px;
+    font-weight: 300;
+    color: #333;
+    text-align: center;
+    line-height: 1.2;
+    letter-spacing: 0.2em;
+    width: 90%;
+    margin: 0 auto;
+    max-width: 800px;
+  }
+  @include MQ(M) {}
+  @include MQ(L) {}
+}
+
+.svg-container {
+  width: 90%;
+  max-width: 250px;
+  margin: 0 auto 100px;
+
+  svg {
+    display: block;
+    overflow: hidden;
+    max-width: 100%;
+    border: 3px solid $color-1;
+    border-radius: 3px;
+  }
+
+  .no-js & {
+    height: 200px;
+    background: url('../img/cd-icon.svg') no-repeat center center;
+
+    svg {
+      display: none;
+    }
+  }
+}
+
+.main-contents {
+  margin-top: 96px;
+  padding: 4em 3em;
+}
+
+.brand-logo a {
+  text-decoration: none;
+}
+
+.status-test {
+  display: flex;
+  justify-content: space-between;
+  width: 80%;
+  max-width: 300px;
+  margin: 0 auto;
+}
+/* -----------------------------
+
+SVG Colors
+
+----------------------------- */
+.stroke {
+  fill: none;
+  stroke-width: 3;
+  stroke-miterlimit: 10;
+}
+
+.stroke-color-1 {
+  stroke: $color-1;
+  fill: $color-2;
+
+  &#floor {
+    fill: none;
+  }
+
+  &#seat-bottom {
+    fill: none;
+  }
+}
+
+.fill-color-1 {
+  fill: $color-1;
+}
+/* -----------------------------
+
+SVG - Loading
+
+----------------------------- */
+#loading {
+  opacity: 1;
+  visibility: visible;
+  -webkit-transition: opacity 0.3s 0s visibility 0s 0s;
+  -moz-transition: opacity 0.3s 0s, visibility 0s 0s;
+  transition: opacity 0.3s 0s, visibility 0s 0s;
+
+  &.fade-out {
+    opacity: 0;
+    visibility: hidden;
+    -webkit-transition: opacity 0.3s 0s, visibility 0s 0.3s;
+    -moz-transition: opacity 0.3s 0s, visibility 0s 0.3s;
+    transition: opacity 0.3s 0s, visibility 0s 0.3s;
+  }
+}
+
+#pause-btn,
+#play-btn {
+  cursor: pointer;
+}
+
+#pause-btn {
+  pointer-events: none;
+}
+
+.play-is-clicked #pause-btn {
+  pointer-events: auto;
+}
+/* -----------------------------
+
+SVG - Buildings
+
+----------------------------- */
+#home-1-chimney,
+#home-3-roof {
+  visibility: hidden;
+}
+/* -----------------------------
+
+Footer
+
+----------------------------- */
+// footer {
+//   width: 100%;
+//   padding: 3em;
+//   background-color: $color-4;
+//   position: fixed;
+//   bottom: 0;
+// }
+/* -----------------------------
+
+Icons
+
+----------------------------- */
+.svg-icon {
+  width: 30px;
+  height: 30px;
+  fill: $color-1;
+}
