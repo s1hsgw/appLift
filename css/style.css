@@ -1,3 +1,4 @@
+@import url(http://fonts.googleapis.com/earlyaccess/notosansjapanese.css);
 /* -----------------------------
 
 Primary Styles
@@ -12,7 +13,7 @@ Primary Styles
 
 body {
   background-color: #fff;
-  font-family: "Open Sans", sans-serif; }
+  font-family: "Noto Sans Japanese", sans-serif; }
 
 header {
   position: fixed;
@@ -68,6 +69,19 @@ header {
 
 /* -----------------------------
 
+Level Colors
+
+----------------------------- */
+.lv0 {
+  transition: background-color 3s linear;
+  background-color: #cfffc9; }
+
+.lv3 {
+  transition: background-color 0.5s linear;
+  background-color: #ffccc9; }
+
+/* -----------------------------
+
 SVG Colors
 
 ----------------------------- */
@@ -83,6 +97,10 @@ SVG Colors
     fill: none; }
   .stroke-color-1#seat-bottom {
     fill: none; }
+
+.stroke-color-2 {
+  stroke: #bac3ca;
+  stroke-width: 6px; }
 
 .fill-color-1 {
   fill: #223443; }

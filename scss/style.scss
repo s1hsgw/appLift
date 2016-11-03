@@ -1,4 +1,5 @@
 @import 'bourbon/bourbon';
+@import url(http://fonts.googleapis.com/earlyaccess/notosansjapanese.css);
 @import '../partials/variables';
 @import '../partials/layout';
 /* -----------------------------
@@ -83,6 +84,32 @@ header {
   max-width: 300px;
   margin: 0 auto;
 }
+
+/* -----------------------------
+
+Level Colors
+
+----------------------------- */
+
+.lv0 {
+  transition: background-color 3s linear;
+  background-color: $color-lv0;
+}
+
+.lv1 {
+
+}
+
+.lv2 {
+
+}
+
+.lv3 {
+  transition: background-color 0.5s linear;
+  background-color: $color-lv3;
+}
+
+
 /* -----------------------------
 
 SVG Colors
@@ -105,6 +132,11 @@ SVG Colors
   &#seat-bottom {
     fill: none;
   }
+}
+
+.stroke-color-2 {
+  stroke: $color-3;
+  stroke-width: 6px;
 }
 
 .fill-color-1 {

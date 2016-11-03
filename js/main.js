@@ -18,16 +18,21 @@
   var downshiftBtn = document.querySelector('#downshift');
   var updownBtn = document.querySelector('#updown');
 
-  startBtn.addEventListener('click', function(){
-      animateFloor();
+  startBtn.addEventListener('click', function() {
+    animateFloor();
+    $('#animated-svg').addClass('lv0');
   });
 
-  upliftBtn.addEventListener('click', function(){
-      uplift();
+  upliftBtn.addEventListener('click', function() {
+    uplift();
+    $('#animated-svg').removeClass('lv0');
+    $('#animated-svg').addClass('lv3');
   });
 
-  downshiftBtn.addEventListener('click', function(){
-      downshift();
+  downshiftBtn.addEventListener('click', function() {
+    downshift();
+    $('#animated-svg').removeClass('lv3');
+    $('#animated-svg').addClass('lv0');
   });
 
 
@@ -86,32 +91,66 @@
     setTimeout(function() {
       mouse.animate({
         transform: 's1 1'
-      }, 400, mina.easeinout);
+      }, 400, mina.easeinout, function() {
+        // $('#animated-svg').addClass('lv1');
+      });
     }, 300);
   }
 
 
 
   function uplift() {
-      cylinderBase.animate({'height': 44}, 600, mina.elastic);
-      seatBase.animate({transform: 'translate(0, -20)'}, 600, mina.elastic);
-      seatBottom.animate({transform: 'translate(0, -20)'}, 600, mina.elastic);
-      leftEye.animate({transform: 'translate(0, -20)'}, 600, mina.elastic);
-      rightEye.animate({transform: 'translate(0, -20)'}, 600, mina.elastic);
-      mouse.animate({transform: 'translate(0, -20)'}, 600, mina.elastic);
-      backBase.animate({transform: 'rotate(180 99 40) translate(0, 20)'}, 600, mina.elastic);
-      backBar.animate({transform: 'rotate(180 98 80) translate(0, 20)'}, 600, mina.elastic);
+    cylinderBase.animate({
+      'height': 44
+    }, 600, mina.elastic);
+    seatBase.animate({
+      transform: 'translate(0, -20)'
+    }, 600, mina.elastic);
+    seatBottom.animate({
+      transform: 'translate(0, -20)'
+    }, 600, mina.elastic);
+    leftEye.animate({
+      transform: 'translate(0, -20)'
+    }, 600, mina.elastic);
+    rightEye.animate({
+      transform: 'translate(0, -20)'
+    }, 600, mina.elastic);
+    mouse.animate({
+      transform: 'translate(0, -20)'
+    }, 600, mina.elastic);
+    backBase.animate({
+      transform: 'rotate(180 99 40) translate(0, 20)'
+    }, 600, mina.elastic);
+    backBar.animate({
+      transform: 'rotate(180 98 80) translate(0, 20)'
+    }, 600, mina.elastic);
   }
 
   function downshift() {
-      cylinderBase.animate({'height': 24}, 400, mina.elastic);
-      seatBase.animate({transform: 'translate(0, 0)'}, 600, mina.elastic);
-      seatBottom.animate({transform: 'translate(0, 0)'}, 600, mina.elastic);
-      leftEye.animate({transform: 'translate(0, 0)'}, 600, mina.elastic);
-      rightEye.animate({transform: 'translate(0, 0)'}, 600, mina.elastic);
-      mouse.animate({transform: 'translate(0, 0)'}, 600, mina.elastic);
-      backBase.animate({transform: 'rotate(180 99 40) translate(0, 0)'}, 600, mina.elastic);
-      backBar.animate({transform: 'rotate(180 98 80) translate(0, 0)'}, 600, mina.elastic);
+    cylinderBase.animate({
+      'height': 24
+    }, 400, mina.elastic);
+    seatBase.animate({
+      transform: 'translate(0, 0)'
+    }, 600, mina.elastic);
+    seatBottom.animate({
+      transform: 'translate(0, 0)'
+    }, 600, mina.elastic);
+    leftEye.animate({
+      transform: 'translate(0, 0)'
+    }, 600, mina.elastic);
+    rightEye.animate({
+      transform: 'translate(0, 0)'
+    }, 600, mina.elastic);
+    mouse.animate({
+      transform: 'translate(0, 0)'
+    }, 600, mina.elastic);
+    backBase.animate({
+      transform: 'rotate(180 99 40) translate(0, 0)'
+    }, 600, mina.elastic);
+    backBar.animate({
+      transform: 'rotate(180 98 80) translate(0, 0)'
+    }, 600, mina.elastic);
 
   }
 
