@@ -9,10 +9,10 @@
     backBar = animatingSvg.select('#back-bar'),
     seatBase = animatingSvg.select('#seat-base'),
     seatBottom = animatingSvg.select('#seat-bottom'),
-    legBase = animatingSvg.select('#leg-base'),
-    legBottom = animatingSvg.select('#leg-bottom'),
-    legBase2 = animatingSvg.select('#leg-base2'),
-    legBottom2 = animatingSvg.select('#leg-bottom2'),
+    leftLegBase = animatingSvg.select('#left-leg-base'),
+    leftLegBottom = animatingSvg.select('#left-leg-bottom'),
+    rightLegBase = animatingSvg.select('#right-leg-base'),
+    rightLegBottom = animatingSvg.select('#right-leg-bottom'),
     floor = animatingSvg.select('#floor');
 
   var isLv3 = false,
@@ -72,6 +72,20 @@
     return s;
   }
 
+  /* ----------------------------
+
+  for iOS Safari Full Screen Mode
+
+  ---------------------------- */
+
+  var anchor = $('a[target="_blank"]');
+	anchor.each(function(){
+		var url = $(this).attr('href');
+		$(this).removeAttr('href');
+		$(this).click(function(){
+			location.href = url;
+		});
+	});
 
 
 
@@ -90,26 +104,26 @@
     setTimeout(function() {
       floor.animate({
         'x2': floor.attr('data-x')
-      }, 400, mina.easeinout, initleg);
+    }, 400, mina.easeinout, initLeg);
     }, 400);
   }
 
-  function initleg() {
+  function initLeg() {
     setTimeout(function() {
-      legBottom.animate({
-        'height': legBottom.attr('data-height')
+      leftLegBottom.animate({
+        'height': leftLegBottom.attr('data-height')
       }, 400, mina.elastic);
-      legBottom2.animate({
-        'height': legBottom2.attr('data-height')
+      rightLegBottom.animate({
+        'height': rightLegBottom.attr('data-height')
       }, 400, mina.elastic);
     }, 200);
 
     setTimeout(function() {
-      legBase.animate({
-        'height': legBase.attr('data-height')
+      leftLegBase.animate({
+        'height': leftLegBase.attr('data-height')
       }, 400, mina.elastic, initSeat);
-      legBase2.animate({
-        'height': legBase2.attr('data-height')
+      rightLegBase.animate({
+        'height': rightLegBase.attr('data-height')
       }, 400, mina.elastic, initSeat);
     }, 100);
   }
@@ -201,10 +215,10 @@
 
     isLv3 = true;
 
-    legBase.animate({
+    leftLegBase.animate({
       'height': 29
     }, 75, mina.elastic);
-    legBase2.animate({
+    rightLegBase.animate({
       'height': 29
     }, 75, mina.elastic);
     seatBase.animate({
@@ -233,10 +247,10 @@
   }
 
   function downshift() {
-    legBase.animate({
+    leftLegBase.animate({
       'height': 24
     }, 75, mina.elastic);
-    legBase2.animate({
+    rightLegBase.animate({
       'height': 24
     }, 75, mina.elastic);
     seatBase.animate({

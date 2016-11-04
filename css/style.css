@@ -40,7 +40,7 @@ header {
 .svg-container {
   width: 90%;
   max-width: 200px;
-  margin: 0 auto 50px; }
+  margin: 0 auto 30px; }
   .svg-container svg {
     display: block;
     overflow: hidden;
@@ -55,7 +55,7 @@ header {
 
 .main-contents {
   margin-top: 63px;
-  padding: 3em; }
+  padding: 2em; }
 
 .brand-logo a {
   text-decoration: none; }
