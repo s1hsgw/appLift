@@ -24,7 +24,7 @@ header {
   width: 100%;
   display: flex;
   justify-content: space-between;
-  padding: 2em;
+  padding: 1em;
   background: $color-4;
   -webkit-box-shadow: 0 0 1px 0 rgba(0,0,0,.3);
   -moz-box-shadow: 0 0 1px 0 rgba(0,0,0,.3);
@@ -69,12 +69,27 @@ header {
 }
 
 .main-contents {
-  margin-top: 96px;
-  padding: 4em 3em;
+  margin-top: 63px;
+  padding: 3em;
 }
 
 .brand-logo a {
   text-decoration: none;
+}
+
+.date-container {
+    text-align: center;
+    width: 80%;
+    max-width: 300px;
+    margin: 0 auto 2em;
+
+    & time {
+        font-size: 1rem;
+        color: $color-1;
+        font-weight: bold;
+        line-height: 1.2;
+        letter-spacing: 0.3em;
+    }
 }
 
 .status-test {
@@ -198,7 +213,7 @@ Icons
 
 ----------------------------- */
 .svg-icon {
-  width: 30px;
-  height: 30px;
+  width: 25px;
+  height: 25px;
   fill: $color-1;
 }

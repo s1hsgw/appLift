@@ -16,7 +16,7 @@
     floor = animatingSvg.select('#floor');
 
   var isLv3 = false,
-      isSwinging = false;
+    isSwinging = false;
 
 
   /* ----------------------------
@@ -51,6 +51,28 @@
   restartBtn.addEventListener('click', function() {
     restart();
   });
+
+
+  /* ----------------------------
+
+  Date Function
+
+  ---------------------------- */
+
+  document.getElementById("date").innerHTML = getNow();
+
+  function getNow() {
+    var now = new Date();
+    var year = now.getFullYear();
+    var mon = now.getMonth() + 1; //１を足すこと
+    var day = now.getDate();
+
+    var s = year + "/" + mon + "/" + day;
+
+    return s;
+  }
+
+
 
 
   /* ----------------------------
