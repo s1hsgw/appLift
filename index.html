@@ -5,6 +5,8 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="mobile-web-app-capable" content="yes">
+  <link rel="apple-touch-startup-image" href="/startup.png">
   <meta http-equiv="X-UA-Compatible" content="ie=edge">
   <link rel="stylesheet" href="css/reset.css">
   <link rel="stylesheet" href="css/style.css">
@@ -87,14 +89,14 @@
   <script src="js/snap.svg-min.js"></script>
   <script src="js/main.js"></script>
   <script>
-  $.ajax({
-    type: 'get',
-    url: './img/sprite.svg'
-  }).done(function(data) {
-    var svg = $(data).find('svg');
-    $('body').prepend(svg);
-  });
-</script>
+    $.ajax({
+      type: 'get',
+      url: './img/sprite.svg'
+    }).done(function(data) {
+      var svg = $(data).find('svg');
+      $('body').prepend(svg);
+    });
+  </script>
 </body>
 
 </html>
