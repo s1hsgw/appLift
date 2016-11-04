@@ -74,11 +74,17 @@ Level Colors
 ----------------------------- */
 .lv0 {
   transition: background-color 3s linear;
-  background-color: #cfffc9; }
+  background-color: #42A5F5; }
+
+.lv1 {
+  background-color: #FFEE58; }
+
+.lv2 {
+  background-color: #FFA726; }
 
 .lv3 {
   transition: background-color 0.5s linear;
-  background-color: #ffccc9; }
+  background-color: #EF5350; }
 
 /* -----------------------------
 
@@ -92,14 +98,14 @@ SVG Colors
 
 .stroke-color-1 {
   stroke: #223443;
-  fill: #D7DCE0; }
+  fill: #dddddd; }
   .stroke-color-1#floor {
     fill: none; }
   .stroke-color-1#seat-bottom {
     fill: none; }
 
 .stroke-color-2 {
-  stroke: #bac3ca;
+  stroke: #c4c4c4;
   stroke-width: 6px; }
 
 .fill-color-1 {
