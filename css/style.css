@@ -12,7 +12,7 @@ Primary Styles
   box-sizing: border-box; }
 
 body {
-  background-color: #fff;
+  background-color: #f8f8f8;
   font-family: "Noto Sans Japanese", sans-serif; }
 
 header {
@@ -22,20 +22,26 @@ header {
   display: flex;
   justify-content: space-between;
   padding: 1em;
-  background: #f8f8f8;
-  -webkit-box-shadow: 0 0 1px 0 rgba(0, 0, 0, 0.3);
-  -moz-box-shadow: 0 0 1px 0 rgba(0, 0, 0, 0.3);
-  box-shadow: 0 0 1px 0 rgba(0, 0, 0, 0.3); }
+  background: #fff;
+  border-top: 3px solid #ffed00;
+  -webkit-box-shadow: 0 0 2px 0 rgba(0, 0, 0, 0.3);
+  -moz-box-shadow: 0 0 2px 0 rgba(0, 0, 0, 0.3);
+  box-shadow: 0 0 2px 0 rgba(0, 0, 0, 0.3); }
   header h1 {
-    font-size: 20px;
-    font-weight: 300;
+    width: 120px;
+    height: 30px;
     color: #333;
-    text-align: center;
-    line-height: 1.2;
-    letter-spacing: 0.2em;
-    width: 90%;
-    margin: 0 auto;
-    max-width: 800px; }
+    background-image: url(../img/APPLIFT-logo.png);
+    background-size: 120px auto;
+    background-repeat: no-repeat;
+    background-position: center; }
+
+.brand-logo a {
+  text-decoration: none; }
+  .brand-logo a h1 {
+    overflow: hidden;
+    text-indent: 100%;
+    white-space: nowrap; }
 
 .svg-container {
   width: 90%;
@@ -54,11 +60,8 @@ header {
       display: none; }
 
 .main-contents {
-  margin-top: 63px;
+  margin-top: 65px;
   padding: 2em; }
-
-.brand-logo a {
-  text-decoration: none; }
 
 .date-container {
   text-align: center;

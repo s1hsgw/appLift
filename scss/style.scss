@@ -14,7 +14,7 @@ Primary Styles
 }
 
 body {
-  background-color: #fff;
+  background-color: $color-4;
   font-family: $primary-font;
 }
 
@@ -25,24 +25,32 @@ header {
   display: flex;
   justify-content: space-between;
   padding: 1em;
-  background: $color-4;
-  -webkit-box-shadow: 0 0 1px 0 rgba(0,0,0,.3);
-  -moz-box-shadow: 0 0 1px 0 rgba(0,0,0,.3);
-  box-shadow: 0 0 1px 0 rgba(0,0,0,.3);
+  background: #fff;
+  border-top: 3px solid #ffed00;
+  -webkit-box-shadow: 0 0 2px 0 rgba(0,0,0,.3);
+  -moz-box-shadow: 0 0 2px 0 rgba(0,0,0,.3);
+  box-shadow: 0 0 2px 0 rgba(0,0,0,.3);
 
   h1 {
-    font-size: 20px;
-    font-weight: 300;
+    width: 120px;
+    height: 30px;
     color: #333;
-    text-align: center;
-    line-height: 1.2;
-    letter-spacing: 0.2em;
-    width: 90%;
-    margin: 0 auto;
-    max-width: 800px;
+    background-image: url(../img/APPLIFT-logo.png);
+    background-size: 120px auto;
+    background-repeat: no-repeat;
+    background-position: center;
   }
-  @include MQ(M) {}
-  @include MQ(L) {}
+
+}
+
+.brand-logo a {
+  text-decoration: none;
+
+  & h1 {
+      overflow: hidden;
+      text-indent: 100%;
+      white-space: nowrap;
+  }
 }
 
 .svg-container {
@@ -69,27 +77,23 @@ header {
 }
 
 .main-contents {
-  margin-top: 63px;
+  margin-top: 65px;
   padding: 2em;
 }
 
-.brand-logo a {
-  text-decoration: none;
-}
-
 .date-container {
-    text-align: center;
-    width: 80%;
-    max-width: 300px;
-    margin: 0 auto 2em;
+  text-align: center;
+  width: 80%;
+  max-width: 300px;
+  margin: 0 auto 2em;
 
-    & time {
-        font-size: 1rem;
-        color: $color-1;
-        font-weight: bold;
-        line-height: 1.2;
-        letter-spacing: 0.3em;
-    }
+  & time {
+    font-size: 1rem;
+    color: $color-1;
+    font-weight: bold;
+    line-height: 1.2;
+    letter-spacing: 0.3em;
+  }
 }
 
 .status-test {
