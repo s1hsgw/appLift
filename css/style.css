@@ -110,14 +110,14 @@ SVG Colors
 
 .stroke-color-1 {
   stroke: #223443;
-  fill: #dddddd; }
+  fill: #eeeeee; }
   .stroke-color-1#floor {
     fill: none; }
   .stroke-color-1#seat-bottom {
     fill: none; }
 
 .stroke-color-2 {
-  stroke: #c4c4c4;
+  stroke: #d5d5d5;
   stroke-width: 6px; }
 
 .fill-color-1 {
