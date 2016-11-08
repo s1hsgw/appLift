@@ -18,6 +18,8 @@
   var isLv3 = false,
     isSwinging = false;
 
+  createCB();
+
 
   /* ----------------------------
 
@@ -48,9 +50,9 @@
     animateLv3();
   });
 
-  restartBtn.addEventListener('click', function() {
-    restart();
-  });
+  // restartBtn.addEventListener('click', function() {
+  //   restart();
+  // });
 
 
   /* ----------------------------
@@ -79,13 +81,13 @@
   ---------------------------- */
 
   var anchor = $('a[target="_blank"]');
-	anchor.each(function(){
-		var url = $(this).attr('href');
-		$(this).removeAttr('href');
-		$(this).click(function(){
-			location.href = url;
-		});
-	});
+  anchor.each(function() {
+    var url = $(this).attr('href');
+    $(this).removeAttr('href');
+    $(this).click(function() {
+      location.href = url;
+    });
+  });
 
 
 
@@ -98,13 +100,16 @@
   function initAnimation() {
     initFloor();
     $('#animated-svg').addClass('lv0');
+    $('#start').fadeOut(1000, function(){
+        $('#restart').fadeIn(2000).removeClass('hidden').css('display', 'inline-block');
+    });
   }
 
   function initFloor() {
     setTimeout(function() {
       floor.animate({
         'x2': floor.attr('data-x')
-    }, 400, mina.easeinout, initLeg);
+      }, 400, mina.easeinout, initLeg);
     }, 400);
   }
 
@@ -326,6 +331,155 @@
     }, 600, mina.easeinout, function() {
       uplift();
     });
+  }
+
+
+  /* ----------------------------
+
+  Modal Animation Functions
+
+  ---------------------------- */
+
+
+  //trigger the animation - open modal window
+  $('[data-type="modal-trigger"]').on('click', function() {
+    var actionBtn = $(this),
+      scaleValue = retrieveScale(actionBtn.next('.modal-bg'));
+
+    actionBtn.addClass('to-circle');
+    actionBtn.next('.modal-bg').addClass('is-visible').one('webkitTransitionEnd otransitionend oTransitionEnd msTransitionEnd transitionend', function() {
+      animateLayer(actionBtn.next('.modal-bg'), scaleValue, true);
+    });
+
+    //if browser doesn't support transitions...
+    if (actionBtn.parents('.no-csstransitions').length > 0) animateLayer(actionBtn.next('.modal-bg'), scaleValue, true);
+  });
+
+  //trigger the animation - close modal window
+  // $('.modal-section .modal-close').on('click', function() {
+  //   closeModal();
+  // });
+
+  $(window).on('resize', function() {
+    //on window resize - update cover layer dimention and position
+    if ($('.modal-section.modal-is-visible').length > 0) window.requestAnimationFrame(updateLayer);
+  });
+
+  function retrieveScale(btn) {
+    var btnRadius = btn.width() / 2,
+      left = btn.offset().left + btnRadius,
+      top = btn.offset().top + btnRadius - $(window).scrollTop(),
+      scale = scaleValue(top, left, btnRadius, $(window).height(), $(window).width());
+
+    btn.css('position', 'fixed').velocity({
+      top: top - btnRadius,
+      left: left - btnRadius,
+      translateX: 0,
+    }, 0);
+
+    return scale;
+  }
+
+  function scaleValue(topValue, leftValue, radiusValue, windowW, windowH) {
+    var maxDistHor = (leftValue > windowW / 2) ? leftValue : (windowW - leftValue),
+      maxDistVert = (topValue > windowH / 2) ? topValue : (windowH - topValue);
+    return Math.ceil(Math.sqrt(Math.pow(maxDistHor, 2) + Math.pow(maxDistVert, 2)) / radiusValue);
+  }
+
+  function animateLayer(layer, scaleVal, bool) {
+    layer.velocity({
+      scale: scaleVal
+    }, 400, function() {
+      $('body').toggleClass('overflow-hidden', bool);
+      (bool) ?
+      layer.parents('.modal-section').addClass('modal-is-visible').end().off('webkitTransitionEnd otransitionend oTransitionEnd msTransitionEnd transitionend'): layer.removeClass('is-visible').removeAttr('style').siblings('[data-type="modal-trigger"]').removeClass('to-circle');
+    });
+  }
+
+  function updateLayer() {
+    var layer = $('.modal-section.modal-is-visible').find('.modal-bg'),
+      layerRadius = layer.width() / 2,
+      layerTop = layer.siblings('.btn').offset().top + layerRadius - $(window).scrollTop(),
+      layerLeft = layer.siblings('.btn').offset().left + layerRadius,
+      scale = scaleValue(layerTop, layerLeft, layerRadius, $(window).height(), $(window).width());
+
+    layer.velocity({
+      top: layerTop - layerRadius,
+      left: layerLeft - layerRadius,
+      scale: scale,
+    }, 0);
+  }
+
+  function closeModal() {
+    var section = $('.modal-section.modal-is-visible');
+    section.removeClass('modal-is-visible').one('webkitTransitionEnd otransitionend oTransitionEnd msTransitionEnd transitionend', function() {
+      animateLayer(section.find('.modal-bg'), 1, false);
+    });
+    //if browser doesn't support transitions...
+    if (section.parents('.no-csstransitions').length > 0) animateLayer(section.find('.modal-bg'), 1, false);
+  }
+
+  /* ----------------------------
+
+  Tag & Comment 保存機能
+
+  ---------------------------- */
+
+  $("#submit").click(
+    function() {
+      storeComment();
+      closeCommentModal();
+    });
+
+
+  function closeCommentModal() {
+
+    //ここでサーバーにイスを下げる命令を投げる
+
+    closeModal();
+
+    setTimeout(function() {
+      restart();
+    }, 1200);
+
+  }
+
+  function storeComment() {
+    console.log("hello");
+    var key;
+    var time = gettime();
+    for (var i = 0, len = localStorage.length; i < len; i++) {
+      key = i + 1;
+    }
+    var text = $("#comment");
+    var tag = $("#tag");
+    console.log(text);
+    localStorage.setItem(key, tag.val() + ":" + text.val() + time);
+    // テキストボックスを空にする
+    text.val("");
+    tag.val("");
+  }
+
+  function createCB() {
+    var cb = $("#CB");
+    var html = [];
+    var key;
+    for (var i = 0, len = localStorage.length; i < len; i++) {
+      key = localStorage.key(i);
+      if (key.match(/[^0-9]+$/)) {
+        value = localStorage.getItem(key);
+        console.log(value + key);
+        html.push($('<p><input type="checkbox" id="tag" name="tag" value="' + value + '">' + value + '</p>'));
+      }
+    }
+    cb.append(html);
+  }
+
+  function gettime() {
+    var hiduke = new Date();
+    var month = hiduke.getMonth() + 1;
+    var day = hiduke.getDate();
+    return (month + "月" + day + "日");
   }
 
 

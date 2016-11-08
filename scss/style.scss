@@ -2,6 +2,7 @@
 @import url(http://fonts.googleapis.com/earlyaccess/notosansjapanese.css);
 @import '../partials/variables';
 @import '../partials/layout';
+@import '../partials/mixins';
 /* -----------------------------
 
 Primary Styles
@@ -68,7 +69,7 @@ header {
 
   .no-js & {
     height: 200px;
-    background: url('../img/cd-icon.svg') no-repeat center center;
+    background: url('../img/icon.svg') no-repeat center center;
 
     svg {
       display: none;
@@ -157,48 +158,7 @@ SVG Colors
 .fill-color-1 {
   fill: $color-1;
 }
-/* -----------------------------
 
-SVG - Loading
-
------------------------------ */
-#loading {
-  opacity: 1;
-  visibility: visible;
-  -webkit-transition: opacity 0.3s 0s visibility 0s 0s;
-  -moz-transition: opacity 0.3s 0s, visibility 0s 0s;
-  transition: opacity 0.3s 0s, visibility 0s 0s;
-
-  &.fade-out {
-    opacity: 0;
-    visibility: hidden;
-    -webkit-transition: opacity 0.3s 0s, visibility 0s 0.3s;
-    -moz-transition: opacity 0.3s 0s, visibility 0s 0.3s;
-    transition: opacity 0.3s 0s, visibility 0s 0.3s;
-  }
-}
-
-#pause-btn,
-#play-btn {
-  cursor: pointer;
-}
-
-#pause-btn {
-  pointer-events: none;
-}
-
-.play-is-clicked #pause-btn {
-  pointer-events: auto;
-}
-/* -----------------------------
-
-SVG - Buildings
-
------------------------------ */
-#home-1-chimney,
-#home-3-roof {
-  visibility: hidden;
-}
 /* -----------------------------
 
 Footer
@@ -211,6 +171,7 @@ Footer
 //   position: fixed;
 //   bottom: 0;
 // }
+
 /* -----------------------------
 
 Icons
@@ -220,4 +181,203 @@ Icons
   width: 25px;
   height: 25px;
   fill: $color-1;
+}
+
+/* -----------------------------
+
+Modal
+
+----------------------------- */
+
+.modal-section {
+	padding: 2em 5%;
+	text-align: center;
+	background-color: $color-2;
+
+	p {
+		margin: 2em 0;
+		line-height: 1.6;
+		color: $color-3;
+		@include font-smoothing;
+	}
+
+	@include MQ(M) {
+		padding: 4em 10%;
+
+		p {
+			font-size: 1rem;
+			line-height: 2;
+		}
+	}
+
+	@include MQ(L) {
+		padding: 4em 20%;
+	}
+}
+
+.modal {
+	position: fixed;
+	top: 0;
+	left: 0;
+	width: 100%;
+	height: 100%;
+
+	visibility: hidden;
+	opacity: 0;
+	pointer-events: none;
+
+	@include transition(visibility 0s .3s, opacity .3s 0s, z-index 0s .3s);
+
+	&::after {
+		/* gradient overlay at bottom of modal window */
+		content: '';
+		position: absolute;
+		left: 0;
+		bottom: 0;
+		width: 100%;
+		height: 60px;
+		pointer-events: none;
+		background: transparent;
+		@include background(linear-gradient(to top,rgba($color-1, 1), rgba($color-1, 0)));
+	}
+
+	.modal-content {
+		height: 100%;
+		width: 100%;
+		padding: 3em 5%;
+		text-align: left;
+		overflow-y: auto;
+		@include font-smoothing; // see partials > mixins.scss
+	}
+
+	p {
+		color: $color-3;
+		line-height: 1.6;
+		margin: 2em 0;
+	}
+
+	.modal-is-visible & {
+		z-index: 1;
+		visibility: visible;
+		opacity: 1;
+		pointer-events: auto;
+
+		@include transition(visibility 0s 0s, opacity .3s 0s, z-index 0s 0s);
+
+		.modal-content {
+			-webkit-overflow-scrolling: touch;
+		}
+	}
+
+	@include MQ(M) {
+
+		.modal-content {
+			padding: 4em 10%;
+		}
+	}
+
+	@include MQ(L) {
+
+		.modal-content {
+			padding: 6em 20%;
+		}
+
+	}
+}
+
+.modal-action {
+	position: relative;
+
+	.btn, .modal-bg {
+        display: inline-block;
+		height: 4em;
+		background-color: rgba(34,52,67, 0.9);
+	}
+
+	.btn {
+		width: 12.5em;
+		border-radius: 5em;
+
+		color: $color-3;
+		line-height: 4em;
+		white-space: nowrap;
+		font-weight: 700;
+		@include font-smoothing;
+
+		@include transition(color .2s .3s, width .3s 0s);
+
+		&.to-circle {
+			width: 4em;
+			color: transparent;
+			@include transition(color .2s 0s, width .3s .2s);
+		}
+	}
+
+	.modal-bg {
+		position: absolute;
+		z-index: 1;
+		left: 50%;
+    	top: 0;
+		width: 4em;
+		border-radius: 50%;
+		opacity: 0;
+		visibility: hidden;
+    	@include transform(translateZ(0));
+    	@include transform(translateX(-2em));
+		@include transition(visibility 0s .5s);
+
+		&.is-visible {
+			opacity: 1;
+			visibility: visible;
+		}
+	}
+}
+
+.modal-close {
+	position: fixed;
+	z-index: 1;
+	top: 20px;
+	right: 5%;
+	height: 50px;
+	width: 50px;
+	border-radius: 50%;
+
+	background: rgba(#000, .3) url(../img/icon-close.svg) no-repeat center center;
+
+	/* image replacement */
+	overflow: hidden;
+	text-indent: 100%;
+	white-space: nowrap;
+
+	visibility: hidden;
+	opacity: 0;
+	@include transform(translateZ(0));
+	@include transform(scale(0));
+	@include transition(transform .3s 0s, visibility 0s .3s, opacity .3s 0s);
+
+	.no-touch &:hover {
+		background-color: rgba(#000, .5);
+	}
+
+	.modal-is-visible & {
+		visibility: visible;
+		opacity: 1;
+		@include transition(transform .3s 0s, visibility 0s 0s, opacity .3s 0s);
+		@include transform(scale(1));
+	}
+
+	@include MQ(M) {
+		top: 70px;
+	}
+}
+
+
+
+.taglist {
+    color: #fff;
+}
+
+
+.modal-action .btn.hidden {
+    display: none;
 }

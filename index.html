@@ -26,12 +26,12 @@
     </a>
 
     <div class="brand-logo">
-      <a href="#">
-          <h1>APPLIFT</h1>
+      <a href="./">
+        <h1>APPLIFT</h1>
       </a>
     </div>
 
-    <a href="#">
+    <a href="./add_tag.html">
       <svg viewBox="0 0 160 160" class="svg-icon">
         <use xlink:href="./img/sprite.svg#icon-settings"></use>
       </svg>
@@ -79,17 +79,36 @@
     </div>
 
     <div class="status-test">
-      <a id="start" href="#">start</a>
       <a id="lv1" href="#">LV1</a>
       <a id="lv2" href="#">LV2</a>
       <a id="lv3" href="#">LV3</a>
-      <a id="restart" href="#">restart</a>
     </div>
 
   </div>
 
+  <section class="modal-section">
+
+    <div class="modal-action">
+      <a href="#0" id="start" class="btn" >計測を開始</a>
+      <a href="#0" id="restart" class="btn hidden" data-type="modal-trigger">イスを元に戻す</a>
+      <span class="modal-bg"></span>
+    </div>
+
+    <div class="modal">
+      <div class="modal-content">
+        <p>APPLIFTしてしまった原因を記録しておきましょう</p>
+        <div id="CB" class="taglist"></div>
+        <p><textarea id="comment" cols="30" rows="5"></textarea></p>
+        <input id="submit" type="button" value="OK">
+      </div>
+    </div>
+
+    <!-- <a href="#0" class="modal-close">Close</a> -->
+  </section>
+
   <script src="https://code.jquery.com/jquery-3.1.1.min.js" integrity="sha256-hVVnYaiADRTO2PzUGmuLJr8BLUSjGIZsDYGmIJLv2b8=" crossorigin="anonymous"></script>
   <script src="js/snap.svg-min.js"></script>
+  <script src="js/velocity.min.js"></script>
   <script src="js/main.js"></script>
   <script>
     $.ajax({

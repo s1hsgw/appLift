@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="mobile-web-app-capable" content="yes">
+  <link rel="apple-touch-icon" href="./applift-touch-icon.png">
+  <link rel="icon" type="image/png" href="./applift-touch-icon.png">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <link rel="stylesheet" href="css/reset.css">
+  <link rel="stylesheet" href="css/style.css">
+  <script src="js/modernizr.js"></script>
+  <title>APPLIFT | Settings</title>
+</head>
+
+<body>
+
+  <header>
+    <a href="#">
+      <svg viewBox="0 0 160 160" class="svg-icon">
+        <use xlink:href="./img/sprite.svg#icon-list"></use>
+      </svg>
+    </a>
+
+    <div class="brand-logo">
+      <a href="./index.html">
+        <h1>APPLIFT</h1>
+      </a>
+    </div>
+
+    <a href="./add_tag.html">
+      <svg viewBox="0 0 160 160" class="svg-icon">
+        <use xlink:href="./img/sprite.svg#icon-settings"></use>
+      </svg>
+    </a>
+
+  </header>
+
+  <main class="main-contents">
+
+    <div id="form">
+      <input id="formList" type="text" size="50">
+      <input id="formButton" type="button" value="追加">
+    </div>
+    <div id="list"></div>
+
+  </main>
+
+
+  <script src="https://code.jquery.com/jquery-3.1.1.min.js" integrity="sha256-hVVnYaiADRTO2PzUGmuLJr8BLUSjGIZsDYGmIJLv2b8=" crossorigin="anonymous"></script>
+
+  <script>
+    $(document).ready(function() {
+      showList();
+      // ボタンをクリックしたときに実行するイベントを設定する
+      $("#formButton").click(
+        // コールバックとしてメソッドを引数にわたす
+        function() {
+          saveList();
+          showList();
+        });
+      $("#removeList").click(
+        function() {
+          removeList();
+        }
+      );
+    });
+
+    // 入力された内容をローカルストレージに保存する
+    function saveList() {
+      // 時刻をキーにして入力されたテキストを保存する
+      var text = $("#formList");
+      var time = new Date();
+      console.log(text);
+      localStorage.setItem(time, text.val());
+      // テキストボックスを空にする
+      text.val("");
+    }
+
+    // ローカルストレージに保存した値を再描画する
+    function showList() {
+      // すでにある要素を削除する
+      var list = $("#list");
+      list.children().remove();
+      // ローカルストレージに保存された値すべてを要素に追加する
+      var key, value, html = [];
+      for (var i = 0, len = localStorage.length; i < len; i++) {
+        key = localStorage.key(i);
+        console.log(key);
+        console.log(key.match(/[^0-9]+$/));
+        if (key.match(/[^0-9]+$/)) {
+          value = localStorage.getItem(key);
+          html.push($('<li id="num">' + value + '<input id="removeList"type="button" onClick="removeList(\'' + key + '\');return false;" class="dlbtn" value="削除"></li>'))
+        }
+      }
+      list.append(html);
+    }
+
+    function removeList(key) {
+      localStorage.removeItem(key);
+      $("#num").on("click", ".dlbtn", function() {
+        $(this).parents('li').remove();
+      })
+    }
+  </script>
+</body>
+
+</html>
