@@ -18,8 +18,26 @@
       font-size: 1.1rem;
     }
 
+    #formList {
+      width: 70%;
+      height: 32px;
+      font-size: 1rem;
+    }
+
+    #formButton {
+      font-size: 0.8rem;
+      background: #e1e1e1;
+      width: 80px;
+      height: 100px;
+      padding: 4px 10px;
+      border-radius: 10%;
+      cursor: pointer;
+      border: 1px solid #223443;
+    }
+
     ul {
       padding: 2rem 0;
+      -webkit-tap-highlight-color:rgba(0,0,0,0);
     }
 
     li {
@@ -29,6 +47,10 @@
       padding: 8px 10px;
       background-color: #223443;
       color: #fff;
+    }
+
+    .deleteBtn {
+      cursor: pointer;
     }
 
     .wrapper {
@@ -66,8 +88,8 @@
   <main class="main-contents">
 
     <div id="form">
-      <input id="formList" type="text" size="30" placeholder="タグ名を入力">
-      <input id="formButton" type="button" value="追加">
+      <input id="formList" type="text" placeholder="タグ名を入力">
+      <a href="#" id="formButton">追加</a>
     </div>
     <ul id="list"></ul>
 
