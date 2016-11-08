@@ -244,6 +244,8 @@ Modal
       -webkit-transition: color 0.2s 0s, width 0.3s 0.2s;
       -moz-transition: color 0.2s 0s, width 0.3s 0.2s;
       transition: color 0.2s 0s, width 0.3s 0.2s; }
+    .modal-action .btn.hidden {
+      display: none; }
   .modal-action .modal-bg {
     position: absolute;
     z-index: 1;
@@ -315,10 +317,12 @@ Modal
     .modal-close {
       top: 70px; } }
 
+/* -----------------------------
+
+Tag & Comment
+
+----------------------------- */
 .taglist {
   color: #fff; }
-
-.modal-action .btn.hidden {
-  display: none; }
 
 /*# sourceMappingURL=style.css.map */

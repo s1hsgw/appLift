@@ -312,6 +312,10 @@ Modal
 			color: transparent;
 			@include transition(color .2s 0s, width .3s .2s);
 		}
+
+        &.hidden {
+            display: none;
+        }
 	}
 
 	.modal-bg {
@@ -372,13 +376,12 @@ Modal
 	}
 }
 
+/* -----------------------------
 
+Tag & Comment
+
+----------------------------- */
 
 .taglist {
     color: #fff;
-}
-
-
-.modal-action .btn.hidden {
-    display: none;
 }

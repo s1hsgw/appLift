@@ -18,7 +18,12 @@
   var isLv3 = false,
     isSwinging = false;
 
-  createCommentBox();
+  init();
+
+  function init() {
+    createCommentBox();
+    document.getElementById("date").innerHTML = getNow();
+  }
 
 
   /* ----------------------------
@@ -31,8 +36,6 @@
   var lv1Btn = document.querySelector('#lv1');
   var lv2Btn = document.querySelector('#lv2');
   var lv3Btn = document.querySelector('#lv3');
-  var restartBtn = document.querySelector('#restart');
-  var updownBtn = document.querySelector('#updown');
 
   startBtn.addEventListener('click', function() {
     initAnimation();
@@ -50,10 +53,6 @@
     animateLv3();
   });
 
-  // restartBtn.addEventListener('click', function() {
-  //   restart();
-  // });
-
 
   /* ----------------------------
 
@@ -61,8 +60,7 @@
 
   ---------------------------- */
 
-  document.getElementById("date").innerHTML = getNow();
-
+  //今日の日付を取得
   function getNow() {
     var now = new Date();
     var year = now.getFullYear();
@@ -83,9 +81,7 @@
   function initAnimation() {
     initFloor();
     $('#animated-svg').addClass('lv0');
-    $('#start').fadeOut(1000, function() {
-      $('#restart').fadeIn(2000).removeClass('hidden').css('display', 'inline-block');
-    });
+    $('#start').fadeOut(1000);
   }
 
   function initFloor() {
@@ -158,7 +154,7 @@
 
   ---------------------------- */
 
-  function animateLv0() {
+  function animateReset() {
     closeMouse();
     $('#animated-svg').removeClass('lv3');
     $('#animated-svg').addClass('lv0');
@@ -171,18 +167,22 @@
   }
 
   function animateLv2() {
-    openMouse();
+    resetFacePosition();
     tiltRight();
     $('#animated-svg').removeClass('lv1');
     $('#animated-svg').addClass('lv2');
   }
 
   function animateLv3() {
-    resetFacePosition();
     resetSeatPosition();
-    console.log(isSwinging);
     $('#animated-svg').removeClass('lv2');
     $('#animated-svg').addClass('lv3');
+    $('#restart').fadeIn(2000).removeClass('hidden').css('display', 'inline-block');
+  }
+
+  function restart() {
+    isLv3 = false;
+    animateReset();
   }
 
   function openMouse() {
@@ -195,11 +195,6 @@
     mouse.animate({
       'height': 2
     }, 600, mina.elastic);
-  }
-
-  function restart() {
-    isLv3 = false;
-    animateLv0();
   }
 
   function uplift() {
@@ -304,8 +299,6 @@
 
   function resetFacePosition() {
 
-    isSwinging = false;
-
     mouse.animate({
       transform: 't0 0'
     }, 600, mina.easeinout);
@@ -315,7 +308,7 @@
     leftEye.animate({
       transform: 't0 0'
     }, 600, mina.easeinout, function() {
-      uplift();
+      openMouse();
     });
   }
 
@@ -323,38 +316,40 @@
 
     seatBase.animate({
       transform: 'r-2 98 141'
-  }, 400, mina.easeinout);
+    }, 400, mina.easeinout);
     seatBottom.animate({
       transform: 'r-2 124 147'
-  }, 400, mina.easeinout, tiltRight);
+    }, 400, mina.easeinout, tiltRight);
   }
 
   function tiltRight() {
 
     seatBase.animate({
       transform: 'r2 98 141'
-  }, 400, mina.easeinout);
+    }, 400, mina.easeinout);
     seatBottom.animate({
       transform: 'r2 124 147'
-  }, 400, mina.easeinout, function() {
+    }, 400, mina.easeinout, function() {
       if (isSwinging) tiltLeft();
     });
   }
 
   function resetSeatPosition() {
 
+    isSwinging = false;
+
     seatBase.animate({
       transform: 'r0 98 141'
     }, 400, mina.easeinout);
     seatBottom.animate({
       transform: 'r0 124 147'
-    }, 400, mina.easeinout);
+    }, 400, mina.easeinout, uplift);
   }
 
 
   /* ----------------------------
 
-  Modal Animation Functions
+  Modal Animation
 
   ---------------------------- */
 
@@ -374,9 +369,9 @@
   });
 
   //trigger the animation - close modal window
-  // $('.modal-section .modal-close').on('click', function() {
-  //   closeModal();
-  // });
+  $('.modal-section .modal-close').on('click', function() {
+    closeModal();
+  });
 
   $(window).on('resize', function() {
     //on window resize - update cover layer dimention and position
@@ -439,44 +434,24 @@
 
   /* ----------------------------
 
-  Tag & Comment Functions
+  Tag & Comment
 
   ---------------------------- */
 
-  $("#submit").click(
+  $("#save").click(
     function() {
       storeComment();
       closeCommentModal();
     });
 
-
-  function closeCommentModal() {
-
-    //ここでサーバーにイスを下げる命令を投げる
-
-    closeModal();
-
-    setTimeout(function() {
-      restart();
-    }, 1200);
-
-  }
-
-  function storeComment() {
-    var key;
-    var time = gettime();
-    for (var i = 0, len = localStorage.length; i < len; i++) {
-      key = i + 1;
+  //タグをひとつしか選択できないようにする
+  $('.tag').on('click', function() {
+    if ($(this).prop('checked')) {
+      // 一旦全てをクリアして再チェックする
+      $('.tag').prop('checked', false);
+      $(this).prop('checked', true);
     }
-    var text = $("#comment");
-    var tag = $("#tag");
-
-    localStorage.setItem(key, tag.val() + ":" + text.val() + time);
-
-    // テキストボックスを空にす
-    text.val("");
-    tag.val("");
-  }
+  });
 
   function createCommentBox() {
     var cb = $("#CB");
@@ -487,22 +462,61 @@
       if (key.match(/[^0-9]+$/)) {
         value = localStorage.getItem(key);
         console.log(value + key);
-        html.push($('<p><input type="checkbox" id="tag" name="tag" value="' + value + '">' + value + '</p>'));
+        html.push($('<p><input type="checkbox" class="tag" value="' + value + '">' + value + '</p>'));
       }
     }
     cb.append(html);
   }
 
-  function gettime() {
-    var hiduke = new Date();
-    var month = hiduke.getMonth() + 1;
-    var day = hiduke.getDate();
+  function storeComment() {
+    var key;
+    var time = getTime();
+    for (var i = 0, len = localStorage.length; i < len; i++) {
+      key = i + 1;
+    }
+    var tag;
+    var text = $("#comment");
+
+    //チェックされているタグを取得
+    $('.tag').each(function() {
+      if ($(this).prop('checked')) {
+        tag = $(this);
+      }
+    });
+
+    console.log('tag', tag.val());
+    console.log('text', text.val());
+
+    localStorage.setItem(key, tag.val() + ":" + text.val() + time);
+
+    // テキストボックスを空にす
+    text.val("");
+    tag.val("");
+  }
+
+  function closeCommentModal() {
+
+    //ここでサーバーにイスを下げる命令を投げる
+
+    //モーダルが閉じてからイスが落ち着く
+    closeModal();
+
+    setTimeout(function() {
+      restart();
+    }, 1200);
+
+  }
+
+  function getTime() {
+    var now = new Date();
+    var month = now.getMonth() + 1;
+    var day = now.getDate();
     return (month + "月" + day + "日");
   }
 
   /* ----------------------------
 
-  for iOS Safari Full Screen Mode
+  prevent links opening Safari in iOS
 
   ---------------------------- */
 

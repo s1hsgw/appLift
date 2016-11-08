@@ -77,7 +77,7 @@
       </a>
     </div>
 
-    <a href="./add_tag.html">
+    <a href="./">
       <svg viewBox="0 0 160 160" class="svg-icon">
         <use xlink:href="./img/sprite.svg#icon-settings"></use>
       </svg>
@@ -113,6 +113,8 @@
 
           var key = $(this).attr('data-key');
           removeList(key);
+
+          //選択したタグをフェードアウトしてから削除
           $(this).prev().fadeOut(1000, function(){
             $(this).prev().remove();
           });
