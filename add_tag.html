@@ -13,6 +13,31 @@
   <link rel="stylesheet" href="css/style.css">
   <script src="js/modernizr.js"></script>
   <title>APPLIFT | Settings</title>
+  <style>
+    body {
+      font-size: 1.1rem;
+    }
+
+    ul {
+      padding: 2rem 0;
+    }
+
+    li {
+      display: block;
+      border-radius: 3px;
+      list-style-type: none;
+      padding: 8px 10px;
+      background-color: #223443;
+      color: #fff;
+    }
+
+    .wrapper {
+      margin-bottom: 0.5rem;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+  </style>
 </head>
 
 <body>
@@ -41,10 +66,10 @@
   <main class="main-contents">
 
     <div id="form">
-      <input id="formList" type="text" size="50">
+      <input id="formList" type="text" size="30" placeholder="タグ名を入力">
       <input id="formButton" type="button" value="追加">
     </div>
-    <div id="list"></div>
+    <ul id="list"></ul>
 
   </main>
 
@@ -55,15 +80,23 @@
     $(document).ready(function() {
       showList();
       // ボタンをクリックしたときに実行するイベントを設定する
-      $("#formButton").click(
+      $("#formButton").on("click",
         // コールバックとしてメソッドを引数にわたす
         function() {
           saveList();
           showList();
         });
-      $("#removeList").click(
-        function() {
-          removeList();
+      $("ul").on("click", ".deleteBtn",
+        function(e) {
+
+          var key = $(this).attr('data-key');
+          removeList(key);
+          $(this).prev().fadeOut(1000, function(){
+            $(this).prev().remove();
+          });
+          $(this).fadeOut(1000, function(){
+            $(this).remove();
+          });
         }
       );
     });
@@ -92,7 +125,8 @@
         console.log(key.match(/[^0-9]+$/));
         if (key.match(/[^0-9]+$/)) {
           value = localStorage.getItem(key);
-          html.push($('<li id="num">' + value + '<input id="removeList"type="button" onClick="removeList(\'' + key + '\');return false;" class="dlbtn" value="削除"></li>'))
+          html.push($('<div class="wrapper"><li id="num">' + value + '</li><a data-key="' + key + '" class="deleteBtn"><svg viewBox="0 0 160 160" class="svg-icon"><use xlink:href="./img/sprite.svg#icon-delete"></use></svg></a></div>'))
+            // html.push($('<li id="num">' + value + '<input id="removeList"type="button" onClick="removeList(\'' + key + '\');return false;" class="dlbtn" value="削除"></li>'))
         }
       }
       list.append(html);
@@ -100,9 +134,9 @@
 
     function removeList(key) {
       localStorage.removeItem(key);
-      $("#num").on("click", ".dlbtn", function() {
-        $(this).parents('li').remove();
-      })
+      // $("#num").on("click", ".dlbtn", function() {
+      //   $(this).parents('li').remove();
+      // })
     }
 
     /* ----------------------------
