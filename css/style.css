@@ -226,6 +226,7 @@ Modal
     height: 4em;
     background-color: rgba(34, 52, 67, 0.9); }
   .modal-action .btn {
+    cursor: pointer;
     width: 12.5em;
     border-radius: 5em;
     color: #d5d5d5;

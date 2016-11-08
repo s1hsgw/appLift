@@ -18,7 +18,7 @@
   var isLv3 = false,
     isSwinging = false;
 
-  createCB();
+  createCommentBox();
 
 
   /* ----------------------------
@@ -76,24 +76,6 @@
 
   /* ----------------------------
 
-  for iOS Safari Full Screen Mode
-
-  ---------------------------- */
-
-  var anchor = $('a');
-  anchor.each(function() {
-    var url = $(this).attr('href');
-    $(this).removeAttr('href');
-    $(this).click(function(e) {
-      e.preventDefault();
-      location.href = url;
-    });
-  });
-
-
-
-  /* ----------------------------
-
   Init Animation Functions
 
   ---------------------------- */
@@ -101,8 +83,8 @@
   function initAnimation() {
     initFloor();
     $('#animated-svg').addClass('lv0');
-    $('#start').fadeOut(1000, function(){
-        $('#restart').fadeIn(2000).removeClass('hidden').css('display', 'inline-block');
+    $('#start').fadeOut(1000, function() {
+      $('#restart').fadeIn(2000).removeClass('hidden').css('display', 'inline-block');
     });
   }
 
@@ -190,12 +172,15 @@
 
   function animateLv2() {
     openMouse();
+    tiltRight();
     $('#animated-svg').removeClass('lv1');
     $('#animated-svg').addClass('lv2');
   }
 
   function animateLv3() {
     resetFacePosition();
+    resetSeatPosition();
+    console.log(isSwinging);
     $('#animated-svg').removeClass('lv2');
     $('#animated-svg').addClass('lv3');
   }
@@ -334,6 +319,38 @@
     });
   }
 
+  function tiltLeft() {
+
+    seatBase.animate({
+      transform: 'r-2 98 141'
+  }, 400, mina.easeinout);
+    seatBottom.animate({
+      transform: 'r-2 124 147'
+  }, 400, mina.easeinout, tiltRight);
+  }
+
+  function tiltRight() {
+
+    seatBase.animate({
+      transform: 'r2 98 141'
+  }, 400, mina.easeinout);
+    seatBottom.animate({
+      transform: 'r2 124 147'
+  }, 400, mina.easeinout, function() {
+      if (isSwinging) tiltLeft();
+    });
+  }
+
+  function resetSeatPosition() {
+
+    seatBase.animate({
+      transform: 'r0 98 141'
+    }, 400, mina.easeinout);
+    seatBottom.animate({
+      transform: 'r0 124 147'
+    }, 400, mina.easeinout);
+  }
+
 
   /* ----------------------------
 
@@ -422,7 +439,7 @@
 
   /* ----------------------------
 
-  Tag & Comment 保存機能
+  Tag & Comment Functions
 
   ---------------------------- */
 
@@ -446,7 +463,6 @@
   }
 
   function storeComment() {
-    console.log("hello");
     var key;
     var time = gettime();
     for (var i = 0, len = localStorage.length; i < len; i++) {
@@ -454,14 +470,15 @@
     }
     var text = $("#comment");
     var tag = $("#tag");
-    console.log(text);
+
     localStorage.setItem(key, tag.val() + ":" + text.val() + time);
-    // テキストボックスを空にする
+
+    // テキストボックスを空にす
     text.val("");
     tag.val("");
   }
 
-  function createCB() {
+  function createCommentBox() {
     var cb = $("#CB");
     var html = [];
     var key;
@@ -483,5 +500,20 @@
     return (month + "月" + day + "日");
   }
 
+  /* ----------------------------
+
+  for iOS Safari Full Screen Mode
+
+  ---------------------------- */
+
+  var anchor = $('a');
+  anchor.each(function() {
+    var url = $(this).attr('href');
+    $(this).removeAttr('href');
+    $(this).click(function(e) {
+      e.preventDefault();
+      location.href = url;
+    });
+  });
 
 }());
