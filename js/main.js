@@ -80,11 +80,12 @@
 
   ---------------------------- */
 
-  var anchor = $('a[target="_blank"]');
+  var anchor = $('a');
   anchor.each(function() {
     var url = $(this).attr('href');
     $(this).removeAttr('href');
-    $(this).click(function() {
+    $(this).click(function(e) {
+      e.preventDefault();
       location.href = url;
     });
   });
