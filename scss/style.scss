@@ -291,7 +291,11 @@ Modal
 	.btn, .modal-bg {
         display: inline-block;
 		height: 4em;
-		background-color: rgba(34,52,67, 0.9);
+		background-color: $color-1;
+
+        &:last-of-type {
+            background-color: rgba(34,52,67, 0.9);
+        }
 	}
 
 	.btn {
@@ -315,6 +319,13 @@ Modal
 
         &.hidden {
             display: none;
+
+        }
+
+        &.inprogress {
+            background-color: #eee;
+            pointer-events: none;
+            color: $color-1;
         }
 	}
 
@@ -379,6 +390,8 @@ Modal
 .commentBox {
     font-size: 16px;
 }
+
+
 
 /* -----------------------------
 

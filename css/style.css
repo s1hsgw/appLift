@@ -225,7 +225,9 @@ Modal
   .modal-action .btn, .modal-action .modal-bg {
     display: inline-block;
     height: 4em;
-    background-color: rgba(34, 52, 67, 0.9); }
+    background-color: #223443; }
+    .modal-action .btn:last-of-type, .modal-action .modal-bg:last-of-type {
+      background-color: rgba(34, 52, 67, 0.9); }
   .modal-action .btn {
     cursor: pointer;
     width: 12.5em;
@@ -247,6 +249,10 @@ Modal
       transition: color 0.2s 0s, width 0.3s 0.2s; }
     .modal-action .btn.hidden {
       display: none; }
+    .modal-action .btn.inprogress {
+      background-color: #eee;
+      pointer-events: none;
+      color: #223443; }
   .modal-action .modal-bg {
     position: absolute;
     z-index: 1;

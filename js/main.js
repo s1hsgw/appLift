@@ -81,7 +81,9 @@
   function initAnimation() {
     initFloor();
     $('#animated-svg').addClass('lv0');
-    $('#start').fadeOut(1000);
+    $('#start').fadeOut(1000, function() {
+        $('#inprogress').fadeIn(1000).removeClass('hidden').css('display', 'inline-block');
+    });
   }
 
   function initFloor() {
@@ -177,7 +179,9 @@
     resetSeatPosition();
     $('#animated-svg').removeClass('lv2');
     $('#animated-svg').addClass('lv3');
-    $('#restart').fadeIn(2000).removeClass('hidden').css('display', 'inline-block');
+    $('#inprogress').fadeOut(1000, function(){
+        $('#restart').fadeIn(2000).removeClass('hidden').css('display', 'inline-block');
+    });
   }
 
   function restart() {
