@@ -171,7 +171,7 @@
       if (!confirm('過去のデータをすべて削除します\n本当によろしいですか？')) {
         return false;
       }
-      
+
       localStorage.clear();
       list.children().fadeOut(1000, function() {
         $(this).remove();

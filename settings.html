@@ -143,10 +143,11 @@
     $(document).ready(function() {
       showList();
 
-      $(document).on("keydown",
+      $('#formInput').on("keypress focusout",
         // コールバックとしてメソッドを引数にわたす
         function(e) {
-          if (e.keyCode === 13) {
+    
+          if (e.keyCode === 13 | e.type === "focusout") {
             saveList();
             showList();
             $('#addNewTag').fadeIn(800);
