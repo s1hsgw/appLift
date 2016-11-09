@@ -15,6 +15,11 @@
   <title>APPLIFT | Data list</title>
 
   <style type="text/css">
+
+    header {
+      z-index: 999;
+    }
+
     .title {
       font-size: 18px;
       color: #333;
@@ -52,12 +57,12 @@
       font-size: 14px;
       content: '>';
       /*font-weight: bold;*/
-      transform:rotate(90deg);
+      transform: rotate(90deg);
       transition: all, 0.25s, linear;
     }
 
     #acData dt.active:after {
-      transform:rotate(-90deg);
+      transform: rotate(-90deg);
     }
 
     #acData dd {
@@ -76,6 +81,17 @@
 
     #acData dd:last-child {
       border-bottom: 1px solid #ddd;
+    }
+
+    #clearStorageBtn {
+      display: block;
+      background-color: #ee4444;
+      color: #fff;
+      margin: 0 auto;
+      padding: 20px;
+      width: 400px;
+      text-decoration: none;
+      text-align: center;
     }
   </style>
 </head>
@@ -112,6 +128,8 @@
       </dl>
     </div>
 
+    <a id="clearStorageBtn" href="#">過去のデータをすべて削除</a>
+
   </main>
 
   <script src="https://code.jquery.com/jquery-3.1.1.min.js" integrity="sha256-hVVnYaiADRTO2PzUGmuLJr8BLUSjGIZsDYGmIJLv2b8=" crossorigin="anonymous"></script>
@@ -122,10 +140,11 @@
 
     });
 
+    var list = $("#acData");
+
     function createList() {
       var key, html = [];
       var date;
-      list = $("#acData");
       for (var i = 0, len = localStorage.length; i < len; i++) {
         key = localStorage.key(i);
         if (!key.match(/[^0-9]+$/)) {
@@ -142,6 +161,29 @@
       $('#acData dt').on('click', function() {
         $(this).nextUntil('dt', 'dd').slideToggle();
         $(this).toggleClass('active');
+      });
+    });
+
+    $("#clearStorageBtn").click(function(){
+      localStorage.clear();
+      list.children().fadeOut(1000, function(){
+        $(this).remove();
+      });
+    });
+
+    /* ----------------------------
+
+    for iOS Safari Full Screen Mode
+
+    ---------------------------- */
+
+    var anchor = $('a');
+    anchor.each(function() {
+      var url = $(this).attr('href');
+      $(this).removeAttr('href');
+      $(this).click(function(e) {
+        e.preventDefault();
+        location.href = url;
       });
     });
   </script>
