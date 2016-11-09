@@ -80,6 +80,14 @@ header {
 .main-contents {
   margin-top: 65px;
   padding: 2em;
+
+  @include MQ(M) {
+      padding: 4em;
+  }
+
+  @include MQ(L) {
+      padding: 8em;
+  }
 }
 
 .date-container {
@@ -190,6 +198,10 @@ Modal
 ----------------------------- */
 
 .modal-section {
+    height: 128px;
+    width: 100%;
+    position: absolute;
+    bottom: 0;
 	padding: 2em 5%;
 	text-align: center;
 	background-color: $color-2;
@@ -201,18 +213,6 @@ Modal
 		@include font-smoothing;
 	}
 
-	@include MQ(M) {
-		padding: 4em 10%;
-
-		p {
-			font-size: 1rem;
-			line-height: 2;
-		}
-	}
-
-	@include MQ(L) {
-		padding: 4em 20%;
-	}
 }
 
 .modal {

@@ -487,7 +487,7 @@
     console.log('tag', tag.val());
     console.log('text', text.val());
 
-    localStorage.setItem(key, tag.val() + ":" + text.val() + time);
+    localStorage.setItem(key, "原因 : " + tag.val() + "ishihara" + "コメント : "  + text.val() + "ishihara" + time);
 
     // テキストボックスを空にす
     text.val("");
@@ -511,7 +511,9 @@
     var now = new Date();
     var month = now.getMonth() + 1;
     var day = now.getDate();
-    return (month + "月" + day + "日");
+    var hour = now.getHours();
+    var min = (now.getMinutes()<10?'0':'') + now.getMinutes()
+    return (month + "月" + day + "日 " + hour + ":" + min);
   }
 
   /* ----------------------------

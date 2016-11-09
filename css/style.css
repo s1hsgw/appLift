@@ -62,6 +62,12 @@ header {
 .main-contents {
   margin-top: 65px;
   padding: 2em; }
+  @media only screen and (min-width: 768px) {
+    .main-contents {
+      padding: 4em; } }
+  @media only screen and (min-width: 1170px) {
+    .main-contents {
+      padding: 8em; } }
 
 .date-container {
   text-align: center;
@@ -147,6 +153,10 @@ Modal
 
 ----------------------------- */
 .modal-section {
+  height: 128px;
+  width: 100%;
+  position: absolute;
+  bottom: 0;
   padding: 2em 5%;
   text-align: center;
   background-color: #eeeeee; }
@@ -156,15 +166,6 @@ Modal
     color: #d5d5d5;
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale; }
-  @media only screen and (min-width: 768px) {
-    .modal-section {
-      padding: 4em 10%; }
-      .modal-section p {
-        font-size: 1rem;
-        line-height: 2; } }
-  @media only screen and (min-width: 1170px) {
-    .modal-section {
-      padding: 4em 20%; } }
 
 .modal {
   position: fixed;
