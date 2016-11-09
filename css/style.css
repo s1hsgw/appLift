@@ -318,6 +318,9 @@ Modal
     .modal-close {
       top: 70px; } }
 
+.commentBox {
+  font-size: 16px; }
+
 /* -----------------------------
 
 Tag & Comment
