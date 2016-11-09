@@ -14,7 +14,6 @@
   <script src="js/modernizr.js"></script>
   <title>APPLIFT | Settings</title>
   <style>
-
     a {
       cursor: pointer;
     }
@@ -34,35 +33,45 @@
     }
 
     #form {
-      margin: 0 auto;
-      width: 95%;
       text-align: center;
+      position: relative;
+      max-width: 300px;
+      padding: 20px;
+      margin: 0 auto;
     }
 
     #formInput {
-      width: 220px;
+      position: absolute;
+      top: 0;
+      left: 0;
+      display: none;
+      width: 100%;
+      max-width: 300px;
       height: 32px;
       font-size: 16px;
     }
 
-    #formButton {
-      font-size: 14px;
-      background: #e1e1e1;
-      width: 80px;
-      height: 100px;
-      padding: 4px 10px;
-      border-radius: 10%;
+    #addNewTag {
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      display: block;
+      font-size: 12px;
+      background: #223443;
+      color: #fff;
+      max-width: 300px;
+      padding: 20px;
       cursor: pointer;
-      border: 1px solid #223443;
-      margin-left: 8px;
+      margin-bottom: 10px;
+      text-align: center;
     }
 
     #list {
       margin: 0 auto;
-      width: 90%;
       padding: 2rem 0;
       -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
-      max-width: 400px;
+      max-width: 300px;
     }
 
     li {
@@ -116,12 +125,12 @@
 
   <main class="main-contents">
 
-    <h1 class="title"> - タグの設定 - </h1>
+    <h1 class="title">タグの設定</h1>
     <p class="description">APPLIFT時に表示する<br/>タグリストを編集できます。</p>
 
     <div id="form">
+      <a href="#" id="addNewTag">新規追加</a>
       <input id="formInput" type="text" placeholder="タグ名を入力">
-      <a href="#" id="formButton">追加</a>
     </div>
     <ul id="list"></ul>
 
@@ -133,13 +142,25 @@
   <script>
     $(document).ready(function() {
       showList();
-      // ボタンをクリックしたときに実行するイベントを設定する
-      $("#formButton").on("click",
+
+      $(document).on("keydown",
         // コールバックとしてメソッドを引数にわたす
-        function() {
-          saveList();
-          showList();
-        });
+        function(e) {
+          if (e.keyCode === 13) {
+            saveList();
+            showList();
+            $('#addNewTag').fadeIn(800);
+            $('#formInput').fadeOut(800);
+          }
+        }
+      );
+
+      $('#addNewTag').on('click', function() {
+        $(this).fadeOut(600);
+        $('#formInput').fadeIn(600).focus();
+
+      });
+
       $("ul").on("click", ".deleteBtn",
         function(e) {
 

@@ -15,7 +15,6 @@
   <title>APPLIFT | Data list</title>
 
   <style type="text/css">
-
     header {
       z-index: 999;
     }
@@ -123,7 +122,7 @@
   </header>
 
   <main class="main-contents">
-    <h1 class="title"> - 過去のデータ - </h1>
+    <h1 class="title">過去のデータ</h1>
     <p class="description">APPLIFTした原因と詳細を表示します。</p>
 
     <div class="dataList">
@@ -167,9 +166,14 @@
       });
     });
 
-    $("#clearStorageBtn").click(function(){
+    $("#clearStorageBtn").click(function() {
+
+      if (!confirm('過去のデータをすべて削除します\n本当によろしいですか？')) {
+        return false;
+      }
+      
       localStorage.clear();
-      list.children().fadeOut(1000, function(){
+      list.children().fadeOut(1000, function() {
         $(this).remove();
       });
     });
