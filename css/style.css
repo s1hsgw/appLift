@@ -1,3 +1,4 @@
+@charset "UTF-8";
 @import url(http://fonts.googleapis.com/earlyaccess/notosansjapanese.css);
 /* -----------------------------
 
@@ -199,10 +200,15 @@ Modal
     overflow-y: auto;
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale; }
+    .modal .modal-content .commentBox {
+      font-size: 16px;
+      margin-top: 10px; }
   .modal p {
     color: #d5d5d5;
     line-height: 1.6;
     margin: 2em 0; }
+    .modal p.commentLable {
+      margin-bottom: 0px; }
   .modal-is-visible .modal {
     z-index: 1;
     visibility: visible;
@@ -324,20 +330,58 @@ Modal
     .modal-close {
       top: 70px; } }
 
+.chkbox {
+  margin: 0 0 10px 0; }
+
+/* ラベルのスタイル　*/
+.chkbox label {
+  padding-left: 30px;
+  /* ラベルの位置 */
+  font-size: 18px;
+  line-height: 18px;
+  display: inline-block;
+  cursor: pointer;
+  position: relative; }
+
+/* ボックスのスタイル */
+.chkbox label:before {
+  content: '';
+  width: 18px;
+  /* ボックスの横幅 */
+  height: 18px;
+  /* ボックスの縦幅 */
+  display: inline-block;
+  position: absolute;
+  left: 0;
+  background-color: #fff;
+  box-shadow: inset 1px 2px 3px 0px #000;
+  border-radius: 6px 6px 6px 6px; }
+
+/* 元のチェックボックスを表示しない */
+.chkbox input[type=checkbox] {
+  display: none; }
+
+/* チェックした時のスタイル */
+.chkbox input[type=checkbox]:checked + label:before {
+  content: '\2713';
+  /* チェックの文字 */
+  font-size: 18px;
+  /* チェックのサイズ */
+  color: #fff;
+  /* チェックの色 */
+  background-color: #EF5350;
+  /* チェックした時の色 */ }
+
 .saveBtn {
   font-size: 14px;
   display: block;
   background-color: #f8f8f8;
   color: #223443;
-  margin: 0 auto;
+  margin: 30px auto 0;
   padding: 20px;
   width: 200px;
-  margin-top: 30px;
   cursor: pointer;
   text-align: center; }
-
-.commentBox {
-  font-size: 16px; }
 
 /* -----------------------------
 

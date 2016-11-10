@@ -248,12 +248,22 @@ Modal
 		text-align: left;
 		overflow-y: auto;
 		@include font-smoothing; // see partials > mixins.scss
+
+        .commentBox {
+            font-size: 16px;
+            margin-top: 10px;
+        }
 	}
 
 	p {
 		color: $color-3;
 		line-height: 1.6;
 		margin: 2em 0;
+
+        &.commentLable {
+            margin-bottom: 0px;
+        }
+
 	}
 
 	.modal-is-visible & {
@@ -387,23 +397,54 @@ Modal
 	}
 }
 
+.chkbox {
+	margin:			0 0 10px 0;
+}
+/* ラベルのスタイル　*/
+.chkbox label {
+	padding-left:		30px;			/* ラベルの位置 */
+	font-size:		18px;
+	line-height:		18px;
+	display:		inline-block;
+	cursor:			pointer;
+	position:		relative;
+}
+
+/* ボックスのスタイル */
+.chkbox label:before {
+	content:		'';
+	width:			18px;			/* ボックスの横幅 */
+	height:			18px;			/* ボックスの縦幅 */
+	display:		inline-block;
+	position:		absolute;
+	left:			0;
+	background-color:	#fff;
+	box-shadow:		inset 1px 2px 3px 0px #000;
+	border-radius:		6px 6px 6px 6px;
+}
+/* 元のチェックボックスを表示しない */
+.chkbox input[type=checkbox] {
+	display:		none;
+}
+/* チェックした時のスタイル */
+.chkbox input[type=checkbox]:checked + label:before {
+	content:		'\2713';		/* チェックの文字 */
+	font-size:		18px;			/* チェックのサイズ */
+	color:			#fff;			/* チェックの色 */
+	background-color: $color-lv3;			/* チェックした時の色 */
+}
+
 .saveBtn {
     font-size: 14px;
     display: block;
     background-color: $color-4;
     color: $color-1;
-    margin: 0 auto;
+    margin: 30px auto 0;
     padding: 20px;
     width: 200px;
-    margin-top: 30px;
     cursor: pointer;
     text-align: center
 }
-
-.commentBox {
-    font-size: 16px;
-}
-
 
 
 /* -----------------------------

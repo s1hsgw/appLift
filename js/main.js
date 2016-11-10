@@ -466,7 +466,8 @@
       if (key.match(/[^0-9]+$/)) {
         value = localStorage.getItem(key);
         console.log(value + key);
-        html.push($('<p><input type="checkbox" class="tag" value="' + value + '">' + value + '</p>'));
+        // html.push($('<p><label><input type="checkbox" class="tag" value="' + value + '">' + value + '</label></p>'));
+        html.push('<div class="chkbox"><input type="checkbox" id="chkbox' + i + '" name="chkbox' + i + '" value="' + value + '" /><label for="chkbox' + i + '">' + value + '</label></div>');
       }
     }
     cb.append(html);
