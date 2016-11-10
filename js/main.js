@@ -82,7 +82,7 @@
     initFloor();
     $('#animated-svg').addClass('lv0');
     $('#start').fadeOut(1000, function() {
-        $('#inprogress').fadeIn(1000).removeClass('hidden').css('display', 'inline-block');
+      $('#inprogress').fadeIn(1000).removeClass('hidden').css('display', 'inline-block');
     });
   }
 
@@ -179,8 +179,8 @@
     resetSeatPosition();
     $('#animated-svg').removeClass('lv2');
     $('#animated-svg').addClass('lv3');
-    $('#inprogress').fadeOut(1000, function(){
-        $('#restart').fadeIn(2000).removeClass('hidden').css('display', 'inline-block');
+    $('#inprogress').fadeOut(1000, function() {
+      $('#restart').fadeIn(2000).removeClass('hidden').css('display', 'inline-block');
     });
   }
 
@@ -491,7 +491,7 @@
     console.log('tag', tag.val());
     console.log('text', text.val());
 
-    localStorage.setItem(key, "原因 : " + tag.val() + "ishihara" + "コメント : "  + text.val() + "ishihara" + time);
+    localStorage.setItem(key, "原因 : " + tag.val() + "ishihara" + "コメント : " + text.val() + "ishihara" + time);
 
     // テキストボックスを空にす
     text.val("");
@@ -507,6 +507,9 @@
 
     setTimeout(function() {
       restart();
+      $('#restart').fadeOut(1000, function() {
+        $('#inprogress').fadeIn(1000).removeClass('hidden').css('display', 'inline-block');
+      });
     }, 1200);
 
   }
@@ -516,7 +519,7 @@
     var month = now.getMonth() + 1;
     var day = now.getDate();
     var hour = now.getHours();
-    var min = (now.getMinutes()<10?'0':'') + now.getMinutes()
+    var min = (now.getMinutes() < 10 ? '0' : '') + now.getMinutes()
     return (month + "月" + day + "日 " + hour + ":" + min);
   }
 
